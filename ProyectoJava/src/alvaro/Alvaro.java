@@ -4,9 +4,7 @@ public class Alvaro {
 
 	public static void main(String[] args) {
 		
-		Alvaro alvaro = new Alvaro();
-		alvaro.miNombre();
-
+		miNombre();
 	}
 	
 	public static void miNombre() {
