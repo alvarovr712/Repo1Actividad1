@@ -1,0 +1,192 @@
+=================================================================================================
+||												|
+|				GIT TUTORIAL 1: CONFIGURANDO GIT EN LOCAL			|
+|_______________________________________________________________________________________________|
+		
+	Este paso solamente hay que hacerlo una vez para la configuración inicial de git bash.
+	Una vez descargado el git bash, y estando dentro, ejecutamos los siguientes comandos en este orden:
+
+	
+		$ git config --global user.name <nombre>
+		$ git config –global user.surname <apellido>
+		$ git config --global user.email <email>
+		$ git config --list 	# Comprobamos que se ha configurado correctamente
+
+
+	Sustituir el texto entre < > con tus datos, pero no pongas dichos símbolos en la instrucción.
+	
+=================================================================================================
+||												|
+|		GIT TUTORIAL 2: INTERACTUANDO CON UN REPOSITORIO YA EXISTENTE			|
+|_______________________________________________________________________________________________|
+		
+
+1. CLONE
+	
+	Clona un repositorio de internet a tu ordenador. 
+
+		$ git clone <url>
+
+	Por ejemplo:
+	
+		$ git clone https://github.com/bpy28/hello.git
+		$ ls
+		$ cd hello 		#Ahora nos metemos en el repositorio clonado
+		$ ls			#El repositorio debería estar vacío
+		$ touch hello.html	#crea un nuevo html en el directorio
+
+2. ADD, COMMIT, PUSH
+
+	Para guardar los cambios realizados habrá que pasar por tres fases, que son:
+	ADD, para añadir los cambios.
+	COMMIT, para guardar los cambios de lo que se haya añadido.
+	PUSH, para subir los cambios a github o el servidor.
+		
+		$ git add <nombre-archivo>
+		$ git add .
+		$ git add hello.html
+		
+		$ git commit -m 'esta es mi primera actualización'
+
+		$ git status 		#Nos dice que está pasando actualmente en el repositorio
+		
+		$ git push		#Sea cuales sean los cambios, súbelos
+
+	Para simplificar esto, es posible fusionar el add+commit de la siguiente forma:
+		
+		$ git commit -am 'mensaje de actualización'
+		$ git push
+		
+
+3. PUSH A UNA RAMA QUE NO EXISTE AÚN
+	
+	Para hacer un push a una rama que no existe, será necesario crearla. 
+	En ese caso, se seguirán estos pasos:
+
+		$ git checkout -b nombre_de_tu_rama
+		$ git commit -m "Mensaje de confirmación"
+		$ git push origin nombre_de_tu_rama
+
+	#Alternativamente se puede usar simpelemtne 'git push',
+	#'git push' lo que hará será realizar los cambios a la rama predeterminada.
+	#Si no hay una rama predeterminada, los cambios se mandarán a máster o main.
+	#Para evitar dudas, siempre se puede usar git push origin <nombre_rama>
+
+		$ git push
+		
+		$ open 		
+
+
+4. PULL UNA VERSIÓN MÁS RECIENTE DE GITHUB A NUESTRO REPOSITORIO LOCAL
+
+	$ git pull
+
+5. CONFLICTOS EN EL MERGE
+
+	Si le damos a un git pull en caso de conlicto (una línea de código
+	está modificada en el repositorio de github y en el local), 
+	saltará un mensaje de error.
+	
+	$ git pull
+	>>error
+	
+	$ git commit -am 'Fix merge conflict'
+
+6. SEGUIMIENTO DE TODO LO QUE SE HA HECHO - GIT LOG
+
+	'git log' permite llevar un seguimiento de todos los cambios realizados,
+	y saber quién ha añadido cada cosa.
+
+7. GIT RESET
+	
+	Devuelve un repositorio a un estado anterior.
+	
+	$ git reset --hard <commit>
+	$ git reset --hard origin/master
+
+8. BRANCHING AND MERGE
+	
+	La capacidad de crear en múltiples ramas nos permite solucionar bugs
+	en paralelo al desarrollo de una característica en concreta de la app.
+	
+	Cuando todo vuelve a l anormalidad, es posible realizar un merge.
+
+		$ git branch			#te dice en qué rama estás actualmente
+		$ git checkout -b rama_stilos	#creamos una nueva rama
+		$ git commit -am 'move style'	
+
+		$ git checkout master		#sin la -b, nos movemos de rama a rama
+		$ git checkout rama_stilos
+		
+		$ git commit -am 'remove cosa'
+
+		$ git merge style			
+		$ git commit -am 'Fix merge conflict'	
+		
+
+=================================================================================================
+||												|
+|		GIT TUTORIAL 3: CREANDO UN NUEVO REPOSITORIO DESDE LOCAL			|
+|_______________________________________________________________________________________________|
+		
+PASO 1: INICALIZAR REPOSITORIO LOCAL
+
+	Nos movemos desde la consola hasta el directorio en el que se encuenre el repositorio
+	que queremos crear. Para desplazarnos, los comandos clave son:
+	
+		pwd 			#nos da la ruta del directorio actual
+		ls 			#nos dice qué hay en el directorio actual
+		cd ruta/directorio	#nos permite desplazarnos
+
+	Una vez estamos en el directorio que queremos convertir en repositorio de git, 
+	inicializamos con el siguiente comando:
+
+		git init
+
+	Con este paso, hemos convertido en un repositorio local el directorio	
+	en el que nos encontremos actualmente.
+
+	El siguiente paso es crear un repositorio desde nuestro github.
+	Esto lo podemos hacer a través de la aplicación web de github.
+	
+		crear -> nuevo repositorio -> público
+	
+	Justo en el momento de la creación del repositorio, 
+	github nos facilitará una URL, que tendrá este formato:
+
+		https://github.com/tu-nombre-usuario/nombre-repositorio.git
+
+	
+
+PASO 2: INDICAR DÓNDE SUBIR NUESTRO REPOSITORIO
+
+	Copiamos esa URL, que será la que usaremos para subir nuestro repositorio local.
+	Desde la consola de git, ahora insertaremos el siguiente comando.
+	Al pulsar intro, ya estará definido el remoto... pero todavía no habremos subido nada.
+
+		
+		git remote add origin https://github.com/tu-nombre-usuario/nombre-repositorio.git
+
+	
+
+PASO 3 (opcional): CREAR UNA RAMA
+
+	Por defecto, github nos coloca en la rama máster, 
+	pero tenemos la opción de crear una nueva rama a la que subir el contenido. 
+	Para este ejemplo, vamos a crear una rama que se llama "gh-pages" (pero podría tener cualquier otro nombre).
+
+
+		git checkout -b gh-pages
+
+
+	A partir de aquí, podemos usar los comandos básicos para actualizar nuestra página:
+
+
+		git add .
+		git commit -m 'comentario sobre nuestra actualización'
+		git push origin gh-pages
+
+
+	
+	
+	
