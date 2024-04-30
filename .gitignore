@@ -1,3 +1,4 @@
+/.metadata/
 # Ignorar archivos generados por Eclipse
 .project
 .classpath
