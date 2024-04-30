@@ -7,11 +7,7 @@
 # Ignorar archivos de compilación
 *.class
 
-# Ignorar archivos comprimidos y binarios
-/bin/
-*.rar
-*.zip
-*.jar
+
 
 # Ignorar archivos de compilación
 *.o
