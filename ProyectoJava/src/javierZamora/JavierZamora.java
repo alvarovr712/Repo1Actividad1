@@ -3,7 +3,7 @@ package javierZamora;
 public class JavierZamora {
 
 	public static void main(String[] args) {
-
+		/*Este comentario solo se verá en la rama main*/
 		saludar();
 
 	}
